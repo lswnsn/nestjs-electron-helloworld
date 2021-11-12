@@ -1,6 +1,6 @@
 const { app, BrowserWindow } = require('electron')
 const path = require('path')
-require('./dist/src/main.js');
+require('./dist/main.js');
 function createWindow () {
   const win = new BrowserWindow({
     width: 1024,
