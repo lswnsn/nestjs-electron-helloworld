@@ -1,0 +1,1 @@
+(self.webpackChunk_oamcu_web=self.webpackChunk_oamcu_web||[]).push([[817],{68817:(e,u,k)=>{"use strict";k.r(u),k.d(u,{NgLinkModule:()=>s.s,NgLinkRoutingModule:()=>a.D});var s=k(53846),a=k(65740)}}]);
