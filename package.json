@@ -13,6 +13,7 @@
     "start": "nest start",
     "start-electron": "electron .",
     "package": "electron-forge package",
+    "tar-package": "tar -zcvf out.tar.gz out/",
     "make": "electron-forge make",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
