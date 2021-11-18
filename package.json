@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "main": "electron-main.js",
   "scripts": {
-    "prebuild": "rimraf dist && mkdir dist && cp -fr client/ emservice/ dist/",
+    "prebuild": "rimraf out && rimraf dist && mkdir dist && cp -fr client/ emservice/ dist/",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",

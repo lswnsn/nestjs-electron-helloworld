@@ -4,7 +4,12 @@ require('./dist/main.js');
 function createWindow () {
   const win = new BrowserWindow({
     width: 1024,
-    height: 768
+    height: 768,
+    webPreferences: {
+      nodeIntegration: true,
+      enableRemoteModule: true,
+      contextIsolation: false
+    }
   })
 
   win.loadURL('http://localhost:3000/ssologin?token=xyz');
