@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { join } from "path";
-
+const fs = require('fs')
 const { ipcMain } = require('electron');
 
 @Injectable()
@@ -16,6 +16,14 @@ export class AppService {
 
     ipcMain?.handle('get-data', async (event, arg) => {
       await console.log('arg', arg);
+
+      fs.readFile(arg, 'utf8' , (err, data) => {
+        if (err) {
+          console.error(err)
+          return
+        }
+        console.log(data)
+      })
 
       return 'ok';
     });

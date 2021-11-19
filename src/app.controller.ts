@@ -79,7 +79,7 @@ export class AppController {
 
   @Get('api/sec/v1/token-info')
   getTokenInfo(): string {
-    return JSON.parse('{"Expires":"Mon Oct 28 06:21:22 UTC 2019","FailedLoginAttempts":"There were 3 failed login attempts since the last successful login","LastFailedLogin":"Mon Oct 28 05:21:22 UTC 2019 from 10.110.70.37 on APIGW","LastLogin":"Tue Nov 5 04:03:59 2019 from 10.110.70.37 on APIGW","Type":"Bearer","PasswordExpirationDate":"2020-01-01","User":"user","ReadOnlyMode":true,"EnforceLogout":false,"EnforceLogoutDelay":60,"Role":"secUserAccessMode","EnforceLogoutReason":"2.Logout For Higher Priority User","_id":"reia7azklo:1636699146926"}');
+    return JSON.parse('{"Expires":"Mon Oct 28 06:21:22 UTC 2019","FailedLoginAttempts":"There were 3 failed login attempts since the last successful login","LastFailedLogin":"Mon Oct 28 05:21:22 UTC 2019 from 10.110.70.37 on APIGW","LastLogin":"Tue Nov 5 04:03:59 2019 from 10.110.70.37 on APIGW","Type":"Bearer","PasswordExpirationDate":"2020-01-01","User":"user","ReadOnlyMode":false,"EnforceLogout":false,"EnforceLogoutDelay":60,"Role":"offLineUser","EnforceLogoutReason":"2.Logout For Higher Priority User","_id":"reia7azklo:1636699146926"}');
   }
 
   @Get('api/asm/v1/system/info')

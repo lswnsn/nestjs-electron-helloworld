@@ -5,6 +5,7 @@ function createWindow () {
   const win = new BrowserWindow({
     width: 1024,
     height: 768,
+    icon: __dirname + '/icon/1.ico',
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true,
