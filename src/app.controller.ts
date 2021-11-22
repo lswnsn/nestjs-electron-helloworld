@@ -1,4 +1,4 @@
-import { Controller, Get, Query, Post, Req } from '@nestjs/common';
+import { Controller, Get, Query, Post, Req, Res } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -30,6 +30,36 @@ export class AppController {
     }
   }
 
+  @Get('api/asm/v1/dus/diff')
+  getDusDiff(): string {
+    return JSON.parse('{"created":[],"removed":[],"revision":"25","updated":[]}');
+  }
+
+  @Get('api/asm/v1/cu-cells/diff')
+  getCellsDiff(): string {
+    return JSON.parse('{"created":[],"removed":[],"revision":"25","updated":[]}');
+  }
+
+  @Get('api/asm/v1/x2links/diff')
+  getX2linksDiff(): string {
+    return JSON.parse('{"created":[],"removed":[],"revision":"25","updated":[]}');
+  }
+
+  @Get('api/asm/v1/xnlinks/diff')
+  getXnlinksDiff(): string {
+    return JSON.parse('{"created":[],"removed":[],"revision":"25","updated":[]}');
+  }
+
+  @Get('api/asm/v1/nglinks/diff')
+  getNglinksDiff(): string {
+    return JSON.parse('{"created":[],"removed":[],"revision":"25","updated":[]}');
+  }
+
+  @Get('api/asm/v1/network-slicing/diff')
+  getNetworkSlicingDiff(): string {
+    return JSON.parse('{"created":[],"removed":[],"revision":"25","updated":[]}');
+  }
+
   @Get('api/pm/v2/counters/M55131C00001/objects')
   getSpecialPmCounter(): string {
     return JSON.parse('["MRBTS-11/NRBTS-11"]');
@@ -43,7 +73,24 @@ export class AppController {
 
   @Get('api/asm/v1/cu')
   getCu(): string {
-    return JSON.parse('{"amfs":[{"ipAddress":"0.0.0.0","name":null,"ngLinkStatus":"Inactive"}],"btsName":"TL1113_CU","id":"11","ipAddresses":{"f1Interface":{"cPlaneIpAddress":[{"v4":"10.106.255.83"}],"uPlaneIpAddress":[{"v4":"10.106.255.99"}]},"mPlaneIpAddress":{"v4":"10.106.255.67"},"ngInterface":{"cPlaneIpAddress":[{"v4":"10.106.255.83"}],"uPlaneIpAddress":null},"vnfIpAddress":"0","x2Interface":{"cPlaneIpAddress":[{"v4":"10.106.255.117"}],"uPlaneIpAddress":[{"v4":"10.106.255.133"}]},"xnInterface":{"cPlaneIpAddress":[{"v4":"10.106.255.117"}],"uPlaneIpAddress":null}},"mcc":262,"mnc":3,"mncLength":2,"mrbtsId":"11","name":"TL1112_CU","numberOfAlarms":1,"operationalState":"enabled","readyForCommissioning":true,"serverIpAddressPrimary":null,"softwareVersion":"5G22R2_0.250.2245","timeZone":"GMT+0800","type":"NSA"}');
+    return JSON.parse('{"amfs":[{"ipAddress":"","name":null,"ngLinkStatus":""}],"btsName":"","id":"","ipAddresses":{"f1Interface":{"cPlaneIpAddress":[],"uPlaneIpAddress":[]},"mPlaneIpAddress":{"v4":""},"ngInterface":{"cPlaneIpAddress":[],"uPlaneIpAddress":null},"vnfIpAddress":"","x2Interface":{"cPlaneIpAddress":[],"uPlaneIpAddress":[]},"xnInterface":{"cPlaneIpAddress":[],"uPlaneIpAddress":null}},"mcc":0,"mnc":0,"mncLength":0,"mrbtsId":"","name":"","numberOfAlarms":0,"operationalState":"","readyForCommissioning":false,"serverIpAddressPrimary":null,"softwareVersion":"","timeZone":"","type":""}');
+  }
+
+  @Get('api/asm/v1/georedundancy/vnf')
+  getVnf(): string {
+    return JSON.parse('{"activityMode":"","alarms":[],"peerVnf":{"ipAddress":"","peerVnf":"","status":""},"redundancyRole":""}');
+  }
+
+  @Get('api/asm/v1/vnfcs')
+  getVnfcs(@Res() res): string {
+    res.setHeader('vnfcType', 'vCu');
+    // return JSON.parse('[]');
+    return res.send([]);
+  }
+
+  @Get('api/fm/v2/fault-toggling-history')
+  getFaultTogglingHistory(): string {
+    return JSON.parse('{"activeFaults":[],"inactiveFaults":[],"numberOfActiveFaults":0,"numberOfInactiveFaults":0}');
   }
 
   @Get('api/asm/v1/account/users/system')
@@ -52,8 +99,31 @@ export class AppController {
   }
 
   @Get('api/fm/v2/alarms/active')
-  getActiveAlarms(): string {
-    return JSON.parse('{"alarms":[{"additionalInfo":"supplAlarmInfo=BTS booted at 2021-11-12T14:09:34.943112209+08:00 due to oam recovery reset;","affectedCells":{"impactOnCells":[],"impactScope":"unknown"},"alarmId":7115,"alarmName":"BASE STATION INFORMATION","alarmingObject":"MRBTS-11","appearTime":"2021-11-12T14:12:31+08:00","cellIds":[],"clearedTime":"","degradedCells":{"impactOnCells":[],"impactScope":"notAvailable"},"eventTypeName":"Quality of service","faultId":"4592","faultName":"BTS Reset Cause","faultyCells":{"impactOnCells":[],"impactScope":"notAvailable"},"lastUpdatedTime":"2021-11-12T14:12:31+08:00","probableCauseName":"Indeterminate","severity":"minor","uuid":"231"}],"total":1}');
+  getActiveAlarms(@Query('pageNumber') pageNumber: string ): string {
+    // console.log('pageNumber', pageNumber)
+    //return JSON.parse('{"alarms":[{"additionalInfo":"supplAlarmInfo=BTS booted at 2021-11-12T14:09:34.943112209+08:00 due to oam recovery reset;","affectedCells":{"impactOnCells":[],"impactScope":"unknown"},"alarmId":7115,"alarmName":"BASE STATION INFORMATION","alarmingObject":"MRBTS-11","appearTime":"2021-11-12T14:12:31+08:00","cellIds":[],"clearedTime":"","degradedCells":{"impactOnCells":[],"impactScope":"notAvailable"},"eventTypeName":"Quality of service","faultId":"4592","faultName":"BTS Reset Cause","faultyCells":{"impactOnCells":[],"impactScope":"notAvailable"},"lastUpdatedTime":"2021-11-12T14:12:31+08:00","probableCauseName":"Indeterminate","severity":"minor","uuid":"231"}],"total":1}');
+    return JSON.parse('{"alarms":[],"total":0}');
+  }
+
+  @Get('api/fm/v2/alarms/historical')
+  getHistoryAlarms(@Req() req): string {
+    //return JSON.parse('{"alarms":[{"additionalInfo":"supplAlarmInfo=BTS booted at 2021-11-12T14:09:34.943112209+08:00 due to oam recovery reset;","affectedCells":{"impactOnCells":[],"impactScope":"unknown"},"alarmId":7115,"alarmName":"BASE STATION INFORMATION","alarmingObject":"MRBTS-11","appearTime":"2021-11-12T14:12:31+08:00","cellIds":[],"clearedTime":"","degradedCells":{"impactOnCells":[],"impactScope":"notAvailable"},"eventTypeName":"Quality of service","faultId":"4592","faultName":"BTS Reset Cause","faultyCells":{"impactOnCells":[],"impactScope":"notAvailable"},"lastUpdatedTime":"2021-11-12T14:12:31+08:00","probableCauseName":"Indeterminate","severity":"minor","uuid":"231"}],"total":1}');
+    return JSON.parse('{"alarms":[],"total":0}');
+  }
+
+  @Get('api/asm/v1/xnlinks/summary')
+  getXnlinksSummary(): string {
+    return JSON.parse('{"administrativeState":{"Locked":0,"Unknown":0,"Unlocked":0},"xnLinkStatus":{"available":0,"conflicting":0,"unavailable":0}}');
+  }
+
+  @Get('api/asm/v1/nglinks/summary')
+  getNglinksSummary(): string {
+    return JSON.parse('{"administrativeState":{"Locked":0,"Unlocked":1},"ngLinkStatus":{"Active":0,"Inactive":1}}');
+  }
+
+  @Get('api/asm/v1/network-slicing/summary')
+  getNetworkSlicingSummary(): string {
+    return JSON.parse('{"administrativeState":{"Locked":0,"Unlocked":1},"operationalState":{"disabled":1,"enabled":0}}');
   }
 
   @Get('api/fm/v2/alarms/active/summary')
@@ -79,11 +149,11 @@ export class AppController {
 
   @Get('api/sec/v1/token-info')
   getTokenInfo(): string {
-    return JSON.parse('{"Expires":"Mon Oct 28 06:21:22 UTC 2019","FailedLoginAttempts":"There were 3 failed login attempts since the last successful login","LastFailedLogin":"Mon Oct 28 05:21:22 UTC 2019 from 10.110.70.37 on APIGW","LastLogin":"Tue Nov 5 04:03:59 2019 from 10.110.70.37 on APIGW","Type":"Bearer","PasswordExpirationDate":"2020-01-01","User":"user","ReadOnlyMode":false,"EnforceLogout":false,"EnforceLogoutDelay":60,"Role":"offLineUser","EnforceLogoutReason":"2.Logout For Higher Priority User","_id":"reia7azklo:1636699146926"}');
+    return JSON.parse('{"Expires":"Mon Oct 28 06:21:22 UTC 2019","AdditionalText":"Warning: your password will expire in 64 days.","FailedLoginAttempts":"There were 3 failed login attempts since the last successful login","LastFailedLogin":"Mon Oct 28 05:21:22 UTC 2019 from 10.110.70.37 on APIGW","LastLogin":"Tue Nov 5 04:03:59 2019 from 10.110.70.37 on APIGW","Type":"Bearer","PasswordExpirationDate":"2020-01-01","User":"user","ReadOnlyMode":false,"EnforceLogout":false,"EnforceLogoutDelay":60,"Role":"offLineUser","EnforceLogoutReason":"2.Logout For Higher Priority User","_id":"w1jxp33jxt:1637425713564"}');
   }
 
-  @Get('api/asm/v1/system/info')
-  getSystemInfo(): string {
-    return JSON.parse('{"securityNotice":"You are about to access a pri￥$d!@#$%^&*()_|+~`阿拉伯123456vate system. This system is for the use of authorized users only. All connections are logged to the extent and by means acceptable by the local legislation.\\n\\nAny unauthorized access or access attempts may be punished to the fullest extent possible under the applicable local legislation.","_id":"5b4kjuevgo:1636699143907"}');
-  }
+  // @Get('api/asm/v1/system/info')
+  // getSystemInfo(): string {
+  //   return JSON.parse('{"securityNotice":"You are about to access a pri￥$d!@#$%^&*()_|+~`阿拉伯123456vate system. This system is for the use of authorized users only. All connections are logged to the extent and by means acceptable by the local legislation.\\n\\nAny unauthorized access or access attempts may be punished to the fullest extent possible under the applicable local legislation.","_id":"5b4kjuevgo:1636699143907"}');
+  // }
 }
